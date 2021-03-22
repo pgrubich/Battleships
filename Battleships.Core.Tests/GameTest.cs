@@ -35,5 +35,21 @@ namespace Battleships.Core
             Assert.NotNull(score);
             Assert.Equal("Hit. Destroyer", score);
         }
+
+        [Fact]
+        public void ShouldReturnSunkWithCorrectShip()
+        {
+            var destroyer = new Ship("Destroyer", 4);
+            _board.AddShip(destroyer, 'A', 1, "horizontal");
+
+            _game.Shoot('A', 1);
+            _game.Shoot('A', 2);
+            _game.Shoot('A', 2);
+            _game.Shoot('A', 3);
+            var score = _game.Shoot('A', 4);
+
+            Assert.NotNull(score);
+            Assert.Equal("Sunk. Destroyer", score);
+        }
     }
 }

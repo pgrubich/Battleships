@@ -5,27 +5,23 @@ namespace Battleships.Core
 {
     public class Board
     {
-        public List<BoardField> BoardFields { get; set; }
+        public List<Ship> Ships { get; set; }
 
         public Board()
         {
-            BoardFields = new List<BoardField>();           
-            for (char row = 'A'; row <= 'J'; row++)
-            {
-                for (int column = 1; column <= 10; column++)
-                {
-                    BoardFields.Add(new BoardField(row, column));
-                }
-            }           
+            Ships = new List<Ship>();
         }
 
         public void AddShip(Ship ship, char startingPositionRow, int startingPositionColumn, string orientation)
         {
+            Ships.Add(ship);
+
             if (orientation == "horizontal")
             {
                 for (int column = startingPositionColumn; column <= startingPositionColumn + ship.Size-1; column++)
                 {
-                    BoardFields.Find(field => field.Row == startingPositionRow && field.Column == column).Value = ship.Type;
+                    var boardField = new BoardField(startingPositionRow, column);
+                    ship.BoardFields.Add(boardField);
                 }
             }
         }

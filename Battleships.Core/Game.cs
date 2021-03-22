@@ -12,11 +12,29 @@ namespace Battleships.Core
 
         public string Shoot(char row, int column)
         {
-            var field = Board.BoardFields.Find(f => f.Row == row && f.Column == column);
-            if (field.Value == "Empty")
-                return "Miss";
+            Ship ship = Board.Ships.Find(s => s.BoardFields.Exists(bf => bf.Column == column && bf.Row == row));
+
+            if (ship != null)
+            {
+                var boardField = ship.BoardFields.Find(f => f.Column == column && f.Row == row);
+                if (boardField.Value == null)
+                {
+                    boardField.Value = "Hit";
+                    ship.Hits += 1;
+                    if (ship.Hits == ship.Size)
+                    {
+                        foreach (var f in ship.BoardFields)
+                        {
+                            f.Value = "Sunk";
+                        }
+                    }
+                }
+                return boardField.Value + ". " + ship.Type;
+            }
             else
-                return "Hit. " + field.Value;
+            {
+                return "Miss";
+            }
         }
     }
 }

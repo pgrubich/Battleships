@@ -9,7 +9,6 @@
         {
             Row = row;
             Column = column;
-            Value = "Empty";
         }
 
     }
