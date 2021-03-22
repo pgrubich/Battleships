@@ -10,13 +10,13 @@ namespace Battleships.Core
 
         public Board Board { get; set; }
 
-        public string Shoot(string coordinates)
+        public string Shoot(char row, int column)
         {
-            var field = Board.BoardFields.Find(f => f.Coordinates == coordinates);
+            var field = Board.BoardFields.Find(f => f.Row == row && f.Column == column);
             if (field.Value == "Empty")
                 return "Miss";
             else
-                return "Hit";
+                return "Hit. " + field.Value;
         }
     }
 }
