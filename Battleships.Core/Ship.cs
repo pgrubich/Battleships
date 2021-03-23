@@ -7,6 +7,10 @@ namespace Battleships.Core
         public string Type { get; set; }
         public int Size { get; set; }
         public int Hits { get; set; }
+        public bool HasSunk
+        {
+            get { return Hits == Size; }
+        }
         public List<BoardField> BoardFields { get; set; }
 
         public Ship(string type, int size)
