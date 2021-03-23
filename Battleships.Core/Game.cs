@@ -10,7 +10,7 @@ namespace Battleships.Core
 
         public Board Board { get; set; }
 
-        public string Shoot(char row, int column)
+        public string Shoot(char column, int row)
         {
             Ship ship = Board.Ships.Find(s => s.BoardFields.Exists(bf => bf.Column == column && bf.Row == row));
 

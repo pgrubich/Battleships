@@ -12,15 +12,15 @@ namespace Battleships.Core
             Ships = new List<Ship>();
         }
 
-        public void AddShip(Ship ship, char startingPositionRow, int startingPositionColumn, string orientation)
+        public void AddShip(Ship ship, char startingPositionColumn, int startingPositionRow, string orientation)
         {
             Ships.Add(ship);
 
             if (orientation == "horizontal")
             {
-                for (int column = startingPositionColumn; column <= startingPositionColumn + ship.Size-1; column++)
+                for (char column = startingPositionColumn; column <= startingPositionColumn + ship.Size-1; column++)
                 {
-                    var boardField = new BoardField(startingPositionRow, column);
+                    var boardField = new BoardField(column, startingPositionRow);
                     ship.BoardFields.Add(boardField);
                 }
             }

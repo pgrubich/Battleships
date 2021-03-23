@@ -43,10 +43,10 @@ namespace Battleships.Core
             _board.AddShip(destroyer, 'A', 1, "horizontal");
 
             _game.Shoot('A', 1);
-            _game.Shoot('A', 2);
-            _game.Shoot('A', 2);
-            _game.Shoot('A', 3);
-            var score = _game.Shoot('A', 4);
+            _game.Shoot('B', 1);
+            _game.Shoot('B', 1);
+            _game.Shoot('C', 1);
+            var score = _game.Shoot('D', 1);
 
             Assert.NotNull(score);
             Assert.Equal("Sunk. Destroyer", score);

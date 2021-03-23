@@ -2,10 +2,10 @@
 {
     public class BoardField
     {
-        public char Row { get; set; }
-        public int Column { get; set; }
+        public int Row { get; set; }
+        public char Column { get; set; }
         public string Value { get; set; }
-        public BoardField(char row, int column)
+        public BoardField(char column, int row)
         {
             Row = row;
             Column = column;
