@@ -11,14 +11,14 @@ namespace Battleships.Core
         {
             get { return Hits == Size; }
         }
-        public List<BoardField> BoardFields { get; set; }
+        public List<ShipField> Fields { get; set; }
 
         public Ship(string type, int size)
         {
             Type = type;
             Size = size;
             Hits = 0;
-            BoardFields = new List<BoardField>();
+            Fields = new List<ShipField>();
         }
     }
 }

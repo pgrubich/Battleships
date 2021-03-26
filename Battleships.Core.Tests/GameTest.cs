@@ -6,13 +6,10 @@ namespace Battleships.Core
     public class GameTest
     {
         private Game _game;
-        private Board _board;
 
         public GameTest()
         {
-            _game = new Game();
-            _board = new Board();
-            _game.Board = _board;
+            _game = new Game(new Board(), new ScoreBoard());
         }
 
         [Fact]
@@ -28,7 +25,7 @@ namespace Battleships.Core
         public void ShouldReturnHitWithCorrectShip()
         {
             var destroyer = new Ship("Destroyer", 4);
-            _board.AddShip(destroyer, 'A', 1, "horizontal");
+            _game.Board.AddShip(destroyer, 'A', 1, "horizontal");
 
             var score = _game.Shoot('A', 1);
 
@@ -41,8 +38,8 @@ namespace Battleships.Core
         {
             var destroyer1 = new Ship("Destroyer", 4);
             var destroyer2 = new Ship("Destroyer", 4);
-            _board.AddShip(destroyer1, 'A', 1, "horizontal");
-            _board.AddShip(destroyer2, 'I', 7, "vertical");
+            _game.Board.AddShip(destroyer1, 'A', 1, "horizontal");
+            _game.Board.AddShip(destroyer2, 'I', 7, "vertical");
 
             _game.Shoot('A', 1);
             _game.Shoot('B', 1);
@@ -60,9 +57,9 @@ namespace Battleships.Core
             var destroyer1 = new Ship("Destroyer", 4);
             var destroyer2 = new Ship("Destroyer", 4);
             var battleship = new Ship("Battleship", 5);
-            _board.AddShip(destroyer1, 'E', 7, "horizontal");
-            _board.AddShip(destroyer2, 'I', 7, "vertical");
-            _board.AddShip(battleship, 'D', 2, "horizontal");
+            _game.Board.AddShip(destroyer1, 'E', 7, "horizontal");
+            _game.Board.AddShip(destroyer2, 'I', 7, "vertical");
+            _game.Board.AddShip(battleship, 'D', 2, "horizontal");
 
             _game.Shoot('E', 2);
             _game.Shoot('F', 2);
@@ -78,10 +75,9 @@ namespace Battleships.Core
             _game.Shoot('I', 7);
             _game.Shoot('I', 8);
             _game.Shoot('I', 9);
-            var result = _game.Shoot('I', 10);
+            _game.Shoot('I', 10);
 
-            Assert.NotNull(result);
-            Assert.Equal("Sunk. Destroyer. You won.", result);
+            Assert.True(_game.End);
         }
     }
 }
